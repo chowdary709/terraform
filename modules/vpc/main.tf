@@ -51,7 +51,7 @@ resource "aws_nat_gateway" "ngw" {
   subnet_id     = aws_subnet.public_subnets[0].id
 
   tags = {
-    Name = "${var.env}.igw"
+    Name = "${var.env}.ngw"
   }
 }
 
@@ -84,7 +84,7 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block     = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.ngw.id
+    nat_gateway_id = aws_nat_gateway.ngw.id
   }
 
   route {
