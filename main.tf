@@ -7,4 +7,5 @@ module "vpc" {
   public_subnets = var.public_subnets
   account_number = var.account_number
   default_vpc_id = var.default_vpc_id
+  default_vpc_cidr = var.default_vpc_cidr
 }

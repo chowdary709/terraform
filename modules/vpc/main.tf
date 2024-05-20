@@ -53,7 +53,7 @@ resource "aws_nat_gateway" "nat" {
   }
 }
 
-resource "aws_vpc_peering_connection" "foo" {
+resource "aws_vpc_peering_connection" "peering" {
   peer_owner_id = var.account_number
   peer_vpc_id   = var.default_vpc_id
   vpc_id        = aws_vpc.main.id
@@ -83,6 +83,9 @@ resource "aws_route_table" "private" {
   route {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat.id
+  }
+  route {
+    cidr_block = var.default_vpc_cidr
   }
 
   tags = {
