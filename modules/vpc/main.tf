@@ -102,3 +102,13 @@ resource "aws_route" "default" {
   destination_cidr_block    = var.vpc_cidr
   vpc_peering_connection_id = aws_vpc_peering_connection.peering.id
 }
+
+resource "aws_route_table_association" "public" {
+  subnet_id      = aws_subnet.public_subnets.id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "private" {
+  subnet_id      = aws_subnet.private_subnets.id
+  route_table_id = aws_route_table.private.id
+}
