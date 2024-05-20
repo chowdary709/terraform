@@ -28,6 +28,8 @@ resource "aws_subnet" "private_subnets" {
   }
 }
 
+
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
@@ -44,7 +46,7 @@ resource "aws_eip" "eip" {
   }
 }
 
-resource "aws_nat_gateway" "nat" {
+resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public_subnets[0].id
 
@@ -82,10 +84,11 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat.id
+    nat_gateway_id = aws_nat_gateway.ngw.id
   }
+
   route {
-    cidr_block = var.default_vpc_cidr
+    cidr_block                = var.default_vpc_cidr
     vpc_peering_connection_id = aws_vpc_peering_connection.peering.id
   }
 
