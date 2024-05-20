@@ -7,20 +7,20 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "public_subnets" {
-  count = length(var.public_subnets)
-  vpc_id     = aws_vpc.main.id
-  cidr_block = var.public_subnets[count.index]
+  count             = length(var.public_subnets)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.public_subnets[count.index]
   availability_zone = var.azs[count.index]
 
   tags = {
-    Name  = "public-subnet-${count.index + 1}"
+    Name = "public-subnet-${count.index + 1}"
   }
 }
 
 resource "aws_subnet" "private_subnets" {
-  count = length(var.private_subnets)
-  vpc_id     = aws_vpc.main.id
-  cidr_block = var.private_subnets[count.index]
+  count             = length(var.private_subnets)
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = var.private_subnets[count.index]
   availability_zone = var.azs[count.index]
 
   tags = {
@@ -37,7 +37,7 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_eip" "eip" {
-  domain   = "vpc"
+  domain = "vpc"
 
   tags = {
     Name = "${var.env}.eip"
@@ -50,6 +50,17 @@ resource "aws_nat_gateway" "nat" {
 
   tags = {
     Name = "${var.env}.igw"
+  }
+}
+
+resource "aws_vpc_peering_connection" "foo" {
+  peer_owner_id = var.account_number
+  peer_vpc_id   = var.default_vpc_id
+  vpc_id        = aws_vpc.main.id
+  auto_accept   = true
+
+  tags = {
+    Name = "peering-from-default-vpc-to-${var.env}-vpc"
   }
 }
 
@@ -70,7 +81,7 @@ resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat.id
   }
 
