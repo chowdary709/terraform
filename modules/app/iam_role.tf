@@ -1,5 +1,5 @@
 resource "aws_iam_role" "role" {
-  name = "${var.env}-${var.component}-role"
+  name = "${var.env}-${var.component}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
