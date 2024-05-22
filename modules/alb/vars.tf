@@ -1,6 +1,6 @@
 variable "env" {}
-variable "alb_type" {}
-variable "internal" {}
+variable "lb_type" {}
 variable "vpc_id" {}
-variable "alb_sg_allow_cidr" {}
+variable "internal" {}
 variable "subnets" {}
+variable "alb_sg_allow_cidr" {}
