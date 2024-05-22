@@ -5,3 +5,4 @@ variable "subnets" {}
 variable "app_port" {}
 variable "cidr_blocks" {}
 variable "instance_type" {}
+variable "bastion_node_cidr" {}
