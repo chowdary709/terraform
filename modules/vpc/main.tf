@@ -29,7 +29,6 @@ resource "aws_subnet" "private_subnets" {
 }
 
 
-
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
@@ -104,7 +103,7 @@ resource "aws_route" "default" {
 }
 
 resource "aws_route_table_association" "public" {
-  count           = length(var.public_subnets)
+  count          = length(var.public_subnets)
   subnet_id      = aws_subnet.public_subnets[count.index].id
   route_table_id = aws_route_table.public.id
 }

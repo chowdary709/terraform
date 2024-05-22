@@ -22,10 +22,10 @@ resource "aws_security_group" "sg" {
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"            // Allow all outbound traffic
+    protocol = "-1"            // Allow all outbound traffic
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name ="${var.env}-${var.component}-sg"
+    Name = "${var.env}-${var.component}-sg"
   }
 }
