@@ -9,7 +9,7 @@ resource "aws_security_group" "sg" {
     from_port   = var.app_port
     to_port     = var.app_port
     protocol    = "tcp"
-    cidr_blocks = var.cidr_blocks  // Allow SSH access from anywhere
+    cidr_blocks = [var.cidr_blocks] // Allow SSH access from anywhere
   }
   ingress {
     description = "SSH"
