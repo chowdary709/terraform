@@ -55,7 +55,7 @@ resource "aws_nat_gateway" "ngw" {
 }
 
 resource "aws_vpc_peering_connection" "peering" {
-  peer_owner_id = var.account_no
+  peer_owner_id = var.account_number
   peer_vpc_id   = var.default_vpc_id
   vpc_id        = aws_vpc.main.id
   auto_accept   = true
