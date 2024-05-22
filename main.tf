@@ -30,17 +30,6 @@ module "private-lb" {
   vpc_id   = module.vpc.vpc_id
   alb_sg_allow_cidr = "0.0.0.0/0"
 }
-module "frontend" {
-  source        = "./modules/app"
-  app_port      = 80
-  cidr_blocks   = var.vpc_cidr
-  component     = "frontend"
-  env           = var.env
-  instance_type = "t2.micro"
-  subnets       = module.vpc.private_subnets
-  vpc_id        = module.vpc.vpc_id
-  bastion_node_cidr = var.bastion_node_cidr
-}
 
 module "backend" {
   source        = "./modules/app"
