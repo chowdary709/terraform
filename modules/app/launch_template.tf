@@ -1,3 +1,8 @@
+resource "aws_iam_instance_profile" "instance_profile" {
+  name = "${var.env}-${var.component}-role"
+  role = aws_iam_role.role.name
+}
+
 resource "aws_launch_template" "template" {
   name                   = "${var.env}-${var.component}"
   image_id               = data.aws_ami.ami.id
@@ -7,7 +12,6 @@ resource "aws_launch_template" "template" {
   iam_instance_profile {
     name = aws_iam_instance_profile.instance_profile.name
   }
-
 
   user_data = base64encode(templatefile("${path.module}/userdata.sh", {
     env       = var.env

@@ -6,18 +6,12 @@ resource "aws_security_group" "sg" {
   // Define ingress rules
   ingress {
     description = "HTTP"
-    from_port   = var.app_port
-    to_port     = var.app_port
+    from_port   = 3306
+    to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = [var.vpc_cidr] // Allow SSH access from anywhere
+    cidr_blocks = [var.vpc_cidr]
   }
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [var.bastion_node_cidr]
-  }
+
   // Define egress rules
   egress {
     from_port   = 0
