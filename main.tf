@@ -21,15 +21,15 @@ module "vpc" {
 #   alb_sg_allow_cidr = "0.0.0.0/0"
 # }
 #
-# module "private-lb" {
-#   source   = "./modules/alb"
-#   env      = var.env
-#   internal = true
-#   lb_type  = "private"
-#   subnets  = module.vpc.private_subnets
-#   vpc_id   = module.vpc.vpc_id
-#   alb_sg_allow_cidr = "0.0.0.0/0"
-# }
+module "private-lb" {
+  source   = "./modules/alb"
+  env      = var.env
+  internal = true
+  lb_type  = "private"
+  subnets  = module.vpc.private_subnets
+  vpc_id   = module.vpc.vpc_id
+  alb_sg_allow_cidr = var.vpc_cidr
+}
 #
 # module "frontend" {
 #   source        = "./modules/app"
