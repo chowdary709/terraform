@@ -29,6 +29,8 @@ module "private-lb" {
   subnets  = module.vpc.private_subnets
   vpc_id   = module.vpc.vpc_id
   alb_sg_allow_cidr = var.vpc_cidr
+  dns_name = "backend.${var.env}.roboshop.internal"
+  zone_id = "Z08360431XA1BOY4SK2N0"
 }
 #
 # module "frontend" {
