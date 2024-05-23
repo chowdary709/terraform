@@ -5,7 +5,7 @@ resource "aws_security_group" "sg" {
   vpc_id = var.vpc_id
   // Define ingress rules
   ingress {
-    description = "HTTP"
+    description = "RDS"
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
