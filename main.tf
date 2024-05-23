@@ -43,6 +43,18 @@ module "vpc" {
 #   vpc_cidr = var.vpc_cidr
 # }
 
+module "backend" {
+  source        = "./modules/app"
+  app_port      = 80
+  component     = "backend"
+  env           = var.env
+  instance_type = "t2.micro"
+  subnets       = module.vpc.private_subnets
+  vpc_id        = module.vpc.vpc_id
+  bastion_node_cidr = var.bastion_node_cidr
+  vpc_cidr = var.vpc_cidr
+}
+
 module "RDS" {
   source = "./modules/rds"
   component = "mysql"
