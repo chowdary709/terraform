@@ -36,20 +36,20 @@ module "private-lb" {
   tg_arn            = module.backend.tg_arn
 }
 
-# module "frontend" {
-#   source            = "./modules/app"
-#   app_port          = 80
-#   component         = "frontend"
-#   env               = var.env
-#   instance_type     = "t2.micro"
-#   subnets           = module.vpc.private_subnets
-#   vpc_id            = module.vpc.vpc_id
-#   bastion_node_cidr = var.bastion_node_cidr
-#   vpc_cidr          = var.vpc_cidr
-#   desired_capacity  = var.desired_capacity
-#   max_size          = var.max_size
-#   min_size          = var.min_size
-# }
+module "frontend" {
+  source            = "./modules/app"
+  app_port          = 80
+  component         = "frontend"
+  env               = var.env
+  instance_type     = "t2.micro"
+  subnets           = module.vpc.private_subnets
+  vpc_id            = module.vpc.vpc_id
+  bastion_node_cidr = var.bastion_node_cidr
+  vpc_cidr          = var.vpc_cidr
+  desired_capacity  = var.desired_capacity
+  max_size          = var.max_size
+  min_size          = var.min_size
+}
 
 module "backend" {
   depends_on        = [module.mysql]
