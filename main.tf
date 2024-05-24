@@ -37,6 +37,7 @@ module "private-lb" {
 }
 
 module "frontend" {
+  depends_on        = [module.backend]
   source            = "./modules/app"
   app_port          = 80
   component         = "frontend"
