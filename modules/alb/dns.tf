@@ -5,3 +5,4 @@ resource "aws_route53_record" "www" {
   ttl     = 300
   records = [aws_lb.lb.dns_name]
 }
+
