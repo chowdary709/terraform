@@ -11,17 +11,17 @@ module "vpc" {
   default_route_table_id = var.default_route_table_id
 }
 
-module "public-lb" {
-  source            = "./modules/alb"
-  env               = var.env
-  internal          = false
-  lb_type           = "public"
-  subnets           = module.vpc.public_subnets
-  vpc_id            = module.vpc.vpc_id
-  alb_sg_allow_cidr = "0.0.0.0/0"
-  dns_name          = "frontend.${var.env}.roboshop.internal"
-  zone_id           = "Z08360431XA1BOY4SK2N0"
-}
+# module "public-lb" {
+#   source            = "./modules/alb"
+#   env               = var.env
+#   internal          = false
+#   lb_type           = "public"
+#   subnets           = module.vpc.public_subnets
+#   vpc_id            = module.vpc.vpc_id
+#   alb_sg_allow_cidr = "0.0.0.0/0"
+#   dns_name          = "frontend.${var.env}.roboshop.internal"
+#   zone_id           = "Z08360431XA1BOY4SK2N0"
+# }
 
 module "private-lb" {
   source            = "./modules/alb"
