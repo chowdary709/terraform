@@ -52,7 +52,7 @@ module "private-lb" {
 # }
 
 module "backend" {
-  depends_on        = [module.RDS]
+  depends_on        = [module.mysql]
   source            = "./modules/app"
   app_port          = 8080
   component         = "backend"
@@ -67,7 +67,7 @@ module "backend" {
   min_size          = var.min_size
 }
 
-module "RDS" {
+module "mysql" {
   source         = "./modules/rds"
   component      = "mysql"
   env            = var.env
